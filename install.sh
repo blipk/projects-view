@@ -1,3 +1,5 @@
-# yes | cp -r ./ ~/.vscode-oss/extensions/vscode-projects-0.1
+VSIX_FILE="projects-linux-x64-0.0.1.vsix"
 
-vscodium --install-extension projects-0.0.1.vsix
+rm $VSIX_FILE
+npm run package
+codium --force --install-extension $VSIX_FILE

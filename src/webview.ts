@@ -29,13 +29,13 @@ export async function getWebviewContent(projectFolder: string): Promise<string> 
       margin-bottom: 30px;
     }
     .heading {
-      width: 100%
-      max-width: 100vw;
+      width: 100%;
+      max-width: 90vw;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       column-gap: 10px;
       row-gap: 10px;

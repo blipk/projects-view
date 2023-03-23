@@ -1,10 +1,10 @@
 {
 	"name": "projects",
-	"displayName": "Vscode Projects View",
-	"description": "Showcase and easily access recent projects in a main folder",
+	"displayName": "Projects View",
+	"description": "Showcase and easily access recent projects in a set folder",
+	"icon": "icon.png",
 	"version": "0.0.1",
 	"publisher": "blipk",
-	"private": true,
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -51,10 +51,10 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
+		"compile": "rm -rf ./out && tsc -p ./",
 		"lint": "eslint \"src/**/*.ts\"",
 		"watch": "tsc -watch -p ./",
-		"package": "vsce package"
+		"package": "vsce package -t linux-x64"
 	},
 	"devDependencies": {
 		"@types/node": "^16.11.7",
