@@ -1,0 +1,66 @@
+{
+	"name": "projects",
+	"displayName": "Vscode Projects View",
+	"description": "Showcase and easily access recent projects in a main folder",
+	"version": "0.0.1",
+	"publisher": "blipk",
+	"private": true,
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://blipk.com/blipk/projects-view"
+	},
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": ["*", "onStartupFinished"],
+	"main": "./out/src/extension",
+	"contributes": {
+		"configuration": {
+			"title": "Projects",
+			"properties": {
+				"projects.projectFolder": {
+					"type": "string",
+					"default": "",
+					"description": "Specifies the folder path that holds your projects"
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"command": "projects.showProjects",
+				"key": "ctrl+f1",
+				"mac": "cmd+f1"
+			},
+			{
+				"command": "projects.showProjects",
+				"key": "ctrl+alt+R",
+				"mac": "cmd+alt+R"
+			}
+		],
+		"commands": [
+			{
+				"command": "projects.showProjects",
+				"title": "Show projects view",
+				"category": "FS"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^16.11.7",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^5.42.0",
+		"@typescript-eslint/parser": "^5.42.0",
+		"eslint": "^8.26.0",
+		"typescript": "^4.9.4"
+	}
+}
