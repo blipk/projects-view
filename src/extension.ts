@@ -26,10 +26,18 @@ export async function activate(context: vscode.ExtensionContext) {
 
         panel.webview.html = await getWebviewContent(projectFolder as string);
 
-		panel.webview.onDidReceiveMessage((message) => {
-			if (message.command === "openFolder") {
-			const uri = vscode.Uri.file(posix.normalize(message.folderPath));
-			vscode.commands.executeCommand("vscode.openFolder", uri, false);
+		panel.webview.onDidReceiveMessage(async (message) => {
+			if (message.command === "openItem") {
+                const uri = vscode.Uri.file(posix.normalize(message.itemPath));
+                const info = await vscode.workspace.fs.stat(uri);
+                if (info.type === vscode.FileType.Directory) {
+                    vscode.window.showInformationMessage("Opening project" + uri);
+                    vscode.commands.executeCommand("vscode.openFolder", uri, false);
+                } else {
+                    vscode.window.showInformationMessage("Opening text document" + uri);
+                    vscode.window.showTextDocument(uri);
+
+                }
 			} else if (message.command === "openSettings") {
                 vscode.commands.executeCommand("workbench.action.openSettings", "projects.projectFolder");
             }

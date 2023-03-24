@@ -118,7 +118,7 @@ export async function getWebviewContent(projectFolder: string): Promise<string> 
     const icon = file.stype === "folder" ? "📁" : "📄";
     const name = file.name;
     return `
-      <li class="${file.stype}-item" title="Open project: ${file.path}" x-project-path="${file.path}">
+      <li class="proj-item ${file.stype}-item" title="Open ${file.stype === "folder" ? "project" : "file"}: ${file.path}" x-project-path="${file.path}">
         <div class="icon">${icon}</div>
         <span class="name">${name}</span>
       </li>
@@ -160,17 +160,17 @@ export async function getWebviewContent(projectFolder: string): Promise<string> 
               })
             })
 
-          const folderItems = [...document.querySelectorAll(".folder-item")];
-          folderItems.forEach(folderItem => {
-            folderItem.addEventListener("click", (event) => {
+          const items = [...document.querySelectorAll(".proj-item")];
+          items.forEach(item => {
+            item.addEventListener("click", (event) => {
               event.preventDefault();
               const t = event.target
               console.log("event", t)
-              const path = folderItem.getAttribute("x-project-path")
+              const path = item.getAttribute("x-project-path")
               console.log(path)
               vscode.postMessage({
-                command: "openFolder",
-                folderPath: path
+                command: "openItem",
+                itemPath: path
               })
             })
           })
